@@ -1,0 +1,169 @@
+.search_content{
+	width:900px;
+	margin-top:30px;
+}
+.notice{
+	margin-bottom:15px;
+}
+.notice label{
+	display:inline;
+	color:red;
+}
+.notice .weeknum{
+ 	margin-left:20px;
+ }
+.search_content .s_left{
+	width:120px;
+	margin:5px;
+	float:left;
+}
+.s_left h4{
+	margin:5px 0px 0px 5px;
+}
+.s_left ul{
+	margin-top:15px;
+}
+.s_left ul li{
+	margin-bottom:10px;
+	font-size:16px;
+}
+.s_left ul li p {
+	color: #999;
+}
+.search_content .top{
+	margin-bottom:15px;
+}
+.search_content .s_center{
+	width:558px;
+	margin:5px;
+	padding:0px 20px;
+	float:left;
+	border-right:1px dashed #ccc;
+	border-left:1px dashed #ccc;
+}
+.s_center .sbyweek{
+	margin-top:5px;
+}
+.sbyweek select{
+	width:100px;
+}
+.sbyweek .btn{
+	vertical-align: top;
+	margin-left:10px;
+}
+.s_center .info{
+	margin-top:10px;
+}
+.s_center .info ol{
+	font-size:16px;
+}
+.s_center .info p{
+	font-size:16px;
+	padding-right:10px;
+}
+.search_content .s_right{
+	width:150px;
+	margin:5px;
+	float:left;
+}
+.s_right ul{
+	margin-top:15px;
+}
+.s_right ul li{
+	margin-bottom:10px;
+	font-size:16px;
+}
+.active{
+	color:red;
+}
+.uptime{
+	float:left;
+	font-weight:bold;
+}
+.info_bottom{
+	padding-top:10px;
+	border-top:1px solid #ccc;
+}
+.uptime label{
+	display:inline;
+	color:red;
+}
+.update{
+	float:right;
+	cursor:pointer;
+}
+.green{
+	color:green;
+}
+.red{
+	color:red;
+}
+.tag{
+	font-size:10px;
+}
+
+/* 报表评论 */
+.comment{
+	margin-top:40px;
+	border:1px solid #ccc;
+}
+.comment h4{
+	margin:0px;
+	height:30px;
+	line-height:30px;
+	background-color:#f6f6f6;
+	font-family:"微软雅黑";
+}
+.comment h4 span{
+	font-size:14px;
+	margin-left:10px;
+	color:#000;
+}
+.comment ul{
+	margin:0px;
+}
+.comment ul li{
+	display:block;
+	background-color:#fff;
+	border-top:1px dashed #ccc;
+}
+.comment ul li p{
+	margin:3px 0px;
+	padding:5px;
+}
+.comment ul li p.param span{
+	float:right;
+	color:#999;
+	margin-left:5px;
+}
+.comment .wantpl{
+	border-top:1px solid #ccc;
+	height:185px;
+	background-color:#F5F8FD;
+}
+.wantpl h4{
+	font-family:"微软雅黑";
+	margin:0px;
+	background-color:#F5F8FD;
+}
+.wantpl h4 span{
+	color:#000;
+}
+.wantpl .txt {
+	width:535px;
+	margin:0px 10px;
+}
+.wantpl .txt textarea{
+	width:520px;
+	height:100px;
+}
+.subpl input{
+	float:right;
+}
+.nopl{
+	color:red;
+	font-size:16px;
+	font-weight:bolder;
+	text-align:center;
+	padding:5px 0px;
+}

@@ -1,0 +1,63 @@
+    .nav ul{
+        list-style-type:none;
+        margin:0px;
+    }
+/*    .nav ul li{
+        float:left;
+    }*/
+    .clear{
+        clear:both;
+    }
+    .line{
+        border-bottom:1px dashed #666;
+    }
+
+
+	/* 首页 */
+	.index_content{
+		margin:0px;
+		padding:0px;
+	}
+	.hero-unit {
+	  margin:0px auto;
+	  padding: 10px;
+	  margin-bottom: 30px;
+	  background-color: #eeeeee;
+	  -webkit-border-radius: 6px;
+	  -moz-border-radius: 6px;
+	  border-radius: 6px;
+	  width:600px;
+	}
+	.hero-unit h2{
+		text-align:right;
+		float:left;
+		width:60%;
+	}
+	.hero-unit h2 label{
+		display:inline;
+		font-size:40px;
+		color:red;
+	}
+	.hero-unit h2 .thisweek{
+		font-size:20px;
+		color:red;
+	}
+	.hero-unit  a,.nowritetag,.plnum{
+		float:left;
+		margin:25px 0px 0px 10px;
+	}
+	.plnum{
+		color:red;
+	}
+	.hero-unit-page{
+		text-align:center;
+		margin-left:50%;
+		position:relative;
+		right:70px;
+	}
+	.error .hero-unit{
+		width:auto;
+	}
+	.error .hero-unit h4{
+		color:red;
+	}

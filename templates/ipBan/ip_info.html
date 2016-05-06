@@ -1,0 +1,124 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <link href="/static/css/anjuke/home.css" rel="stylesheet" type="text/css" media="screen">
+    <script type="text/javascript" src="/static/js/anjuke/home.js"></script>
+    <script type="text/javascript" src="/static/assets/js/bootstrap-button.js"></script>
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">ip info</li>
+</ul>
+{% endblock %}
+{% block content %}
+      <ul class="nav pull-right">
+        <form method="get" class="form-search" id="searchform" action="">
+            <div class="input-append">
+                <input id="searchboxinput" class="search-query" type="text" name="q"  placeholder="Search ip" title="输入ip" style="width:150px" value={{data.q}}>
+                <button id="searchButton" type="submit" class="btn">搜索</button>
+            </div>
+            <a id="searchHelp" class="btn hide" href="#" style="padding-left: 5px; padding-right: 5px"><i class="icon-question-sign"></i></a>
+        </form>
+      </ul>
+    <ul class="nav nav-pills">
+
+    </ul>
+<div class="row">
+  <div style="width:49%;border:1px;float:left;">
+    <table class='table table-striped'>
+      <thead>
+        <tr>白名单</tr>
+        <tr>
+          <th>ip</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      {% for historyItem in data.whiteList %}
+      <tr>
+        <td><a href="?q={{historyItem.ip}}">{{historyItem.ip}}</a></td>
+        <td>{{historyItem.desc}}</td>
+        {% if data.auth != 0 %}
+            <td><a href=../updateIp?is_del=1&id={{historyItem.id}}>移除</a></td>
+            <td><a href=../updateIp?is_white=0&id={{historyItem.id}}>加入黑名单</a></td>
+        {% endif %}
+      </tr>
+      {% endfor%}
+    </table>
+    <div class="pagination pagination-small pagination-right">
+      <ul>
+        {% if not data.whiteList.previous_page_number %}
+        {% else %}
+          {% if data.q %}
+                  <a href="?white_page={{ data.whiteList.previous_page_number }}&black_page={{data.black_page}}&q={{data.q}}">«</a>
+          {% else %}
+                  <a href="?white_page={{ data.whiteList.previous_page_number }}&black_page={{data.black_page}}">«</a>
+          {% endif %}
+
+        {% endif %}
+        <li class="active">
+          <a href="#">{{ data.whiteList.number }}</a>
+        </li>
+        {% if not data.whiteList.has_next %}
+        {% else %}
+          {% if data.q %}
+        	      <a href="?white_page={{ data.whiteList.next_page_number }}&black_page={{data.black_page}}&q={{data.q}}">»</a>
+          {% else %}
+             	  <a href="?white_page={{ data.whiteList.next_page_number }}&black_page={{data.black_page}}">»</a>
+          {% endif %}
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div style="width:49%;float:right;">
+    <table class='table table-striped'>
+      <thead>
+        <tr>黑名单</tr>
+        <tr>
+          <th>ip</th>
+          <th>desc</th>
+        </tr>
+      </thead>
+      {% for historyItem in data.blackList %}
+      <tr>
+        <td><a href="?q={{historyItem.ip}}">{{historyItem.ip}}</a></td>
+        <td>{{historyItem.desc}}</td>
+        {% if data.auth != 0 %}
+        <td><a href=../updateIp?is_del=1&id={{historyItem.id}}>移除</a></td>
+        {% endif %}
+      </tr>
+      {% endfor%}
+    </table>
+    <div class="pagination pagination-small pagination-right">
+      <ul>
+        {% if not data.blackList.previous_page_number %}
+        {% else %}
+          {% if data.q %}
+          	<a href="?black_page={{ data.blackList.previous_page_number }}&white_page={{data.white_page}}&q={{data.q}}">«</a>
+          {% else %}
+          	<a href="?black_page={{ data.blackList.previous_page_number }}&white_page={{data.white_page}}">«</a>
+          {% endif %}
+
+        {% endif %}
+        <li class="active">
+          <a href="#">{{ data.blackList.number }}</a>
+        </li>
+        {% if not data.blackList.has_next %}
+        {% else %}
+          {% if data.q %}
+        	      <a href="?black_page={{ data.blackList.next_page_number }}&white_page={{data.white_page}}&q={{data.q}}">»</a>
+          {% else %}
+             	 <a href="?black_page={{ data.blackList.next_page_number }}&white_page={{data.white_page}}">»</a>
+          {% endif %}
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+    <br/>
+  </div>
+</div>
+
+{% endblock %}

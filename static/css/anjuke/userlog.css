@@ -1,0 +1,15 @@
+body {
+
+}
+
+#output_column{
+	float:right;
+	width:80%;
+	min-height:500px;
+	font-size: 12px;
+}
+
+textarea{
+	width:90%;	
+	font-size:12px;
+}

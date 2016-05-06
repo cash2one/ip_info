@@ -1,0 +1,29 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <link href="/static/assets/css/sakuya.css" rel="stylesheet">
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">新增user agent</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% if data.auth != 0 %}
+    <div>
+        <form action="addUa" method="get">
+           <input type="text" name="user_agent" maxlength="20" placeholder="此处输入user agent">
+           </br>
+           </br>
+            <button type="submit" class="btn btn-success">确定</button>
+        </form>
+            <a href ="/uaBan/uaInfo">返回user agent列表页</a>
+    </div>
+{% else %}
+	<font size="3px" color="red">很遗憾，你没有权限 </font>
+{% endif %}
+{% endblock %}

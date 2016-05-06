@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+        Remove this if you use the .htaccess -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <title>用户端系统 {% block title %} {% endblock %}</title>
+        <meta name="description" content="" />
+        <meta name="author" content="孟 智" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--<link href="/static/css/blueprint/screen.css" rel="stylesheet" type="text/css" media="screen">-->
+        <link href="/static/assets/css/bootstrap.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                padding-top: 70px;
+                overflow-y: scroll;
+            }
+            ul.nav li.dropdown:hover ul.dropdown-menu {
+                display: block;
+                margin-top: -3px;
+                margin-left: 10px;
+            }
+            a.menu:after, .dropdown-toggle:after {
+                content: none;
+            }
+        </style>
+        <link href="/static/assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="/static/css/global/main.css" rel="stylesheet" type="text/css" media="screen">
+        {#<link href="/static/assets/css/github.css" rel="stylesheet" type="text/css" media="screen">#}
+
+        <script type="text/javascript" src="/static/js/global/jquery1.8.3.js"></script>
+        <script type="text/javascript" src="/static/js/global/main.js"></script>
+        {#<script type="text/javascript" src="/static/assets/js/highlight.pack.js"></script>#}
+        {% block jscss %}
+        {% endblock %}
+    </head>
+
+    <body>
+        {% block head %}
+        <div class="navbar navbar-fixed-top navbar-inverse">
+            <div class='navbar-inner'>
+                <div class="container">
+                    <a class="brand" href="/" title="Any fool can write code that a computer can understand. Good programmers write code that humans can understand.">GOMBOC</a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="{% if data.channelName == 'ipBan'%} active {% endif %}dropdown">
+                                <a href="#" class="dropdown-toggle">ip封禁</a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/ipBan/ipInfo/">ip列表</a></li>
+                                  <li><a href="/uaBan/uaInfo/">user agent列表</a></li>
+                                  <li><a href="/ipBan/list?type=0">封禁列表</a></li>
+                                  <li><a href="/ipBan/rule/">封禁规则</a></li>
+                                  <li><a href="/ipBan/ipAdmin/">后台</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav">
+                            <li class="{% if data.channelName == 'tools'%} active {% endif %}dropdown">
+                                <a href="#" class="dropdown-toggle">report</a>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/tools/auction_report/">精选有效不扣费率报表</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-collapse">
+                    <ul class="nav pull-right">
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a href="#" id="username" data-username="{{user.username}}" class="dropdown-toggle">{{user.first_name}}</a>
+                                <ul class="dropdown-menu">
+                                    <li><a id="logout" href="javascript:;">退出登录</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href='/login'>[ 登 录 ]</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <div class='container'>
+            {%block crumb %}{% endblock %}
+            {%block content %}{% endblock %}
+        </div>
+
+        <footer>
+            <div class="container">
+            {% block footer %}
+            <div class="row" style="text-align: center;">
+                <div class="span12" title="其实没人…">&copy; 用户事业部
+                </div>
+            </div>
+            {% endblock %}
+            </div>
+        </footer>
+
+        <script src="/static/assets/js/bootstrap-modal.js"></script>
+        <script src="/static/assets/js/bootstrap-dropdown.js"></script>
+    </body>
+</html>

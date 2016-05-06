@@ -1,0 +1,10 @@
+#Wed Aug 07 15:47:51 CST 2013
+eclipse.preferences.version=1
+encoding//deploy/models.py=utf8
+encoding//deploy/service.py=utf-8
+encoding//deploy/views.py=utf8
+encoding//libs/git/Git.py=utf-8
+encoding//project/forms.py=utf-8
+encoding//project/services.py=utf-8
+encoding//project/views.py=utf-8
+encoding//siteDeploy/settings.py=utf8

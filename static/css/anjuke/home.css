@@ -1,0 +1,22 @@
+td {
+    padding:3px 5px;
+}
+
+li{
+    list-style:none;
+}
+#current_area {
+
+}
+
+#head{
+    padding:5px;
+    margin-bottom:14px;
+    border-bottom: 3px solid #aaa;
+}
+.span6{
+    width: 770px;
+}
+.span6_l{
+    width: 370px;
+}

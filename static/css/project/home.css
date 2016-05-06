@@ -1,0 +1,12 @@
+#projectlist{
+	margin:-20px 0;
+	min-height:503px;
+}
+#searchbox{
+	float:right;
+}
+
+#searchbox input.searchboxinput{
+	width:200px;
+}
+

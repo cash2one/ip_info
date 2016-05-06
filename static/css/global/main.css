@@ -1,0 +1,67 @@
+html {
+	background-color: whiteSmoke;
+}
+
+body {
+	font-size: 13px;
+}
+
+footer {
+	padding: 20px 0 100px;
+	margin-top: 70px;
+	border-top: 1px solid #E5E5E5;
+	background-color: whiteSmoke;
+}
+
+.width50percent{
+	width:50%;
+}
+
+.title{
+	padding:0 20px;
+	font-weight: bold;
+	background:#ddd;
+	height:30px;
+	line-height:30px;
+	margin-bottom:15px;
+}
+
+.marginVertical{
+	margin:15px 0;
+}
+
+.red{
+	color:red;
+}
+
+.label.label-chinese {
+	font-size: 13px;
+	padding: 3px 5px 3px;
+}
+.valignTop{
+	list-style:none;
+	margin-top:10px;
+}
+.valignTop li{
+	padding:5px;
+}
+.valignTop li *{
+	vertical-align:top;
+	margin:5px;
+}
+
+.dropdown-toggle {
+	cursor: default!important;
+}
+
+.common-inner-content{
+	 -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+     border-radius: 3px;
+     border: 1px solid #ccc;
+     border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.text-center {
+    text-align: center;
+}

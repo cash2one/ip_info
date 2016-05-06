@@ -1,0 +1,106 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <script type="text/javascript" src="/static/js/ipBan/rule.js"></script>
+    <script type="text/javascript" src="/static/assets/js/bootstrap-button.js"></script>
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">封禁规则</li>
+</ul>
+{% endblock %}
+{% block content %}
+      <ul class="nav pull-right">
+        <form method="get" class="form-search" id="searchform" action="">
+            <div class="input-append">
+                <input id="searchboxinput" class="search-query" type="text" name="q" placeholder="Search regex" title="输入正则关键字" style="width:150px"/>
+                <button id="searchButton" type="submit" class="btn">搜索</button>
+            </div>
+            <a id="searchHelp" class="btn hide" href="#" style="padding-left: 5px; padding-right: 5px"><i class="icon-question-sign"></i></a>
+        </form>
+      </ul>
+<div class="row">
+  <div>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>desc</th>
+          <th>freq</th>
+          <th>num</th>
+          <th>hostname</th>
+          <th>regexp</th>
+          <th>ipduan_select</th>
+          <th>ipduan_num</th>
+        </tr>
+      </thead>
+      {% for historyItem in data.monitorTypeList %}
+      <tr>
+       {% if data.auth != 0 %}
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='desc' name='desc' data-id="{{ historyItem.id }}" value='{{ historyItem.desc }}' style="width:160px" maxlength='100' readonly='readonly' ></td>
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='freq' name='freq' data-id="{{ historyItem.id }}" value='{{ historyItem.freq }}' style="width:35px" maxlength='10' readonly='readonly' ></td>
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='num' name='num' data-id="{{ historyItem.id }}" value='{{ historyItem.num }}' style="width:35px" maxlength='10' readonly='readonly' ></td>
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='hostname' name='hostname' data-id="{{ historyItem.id }}" value='{{ historyItem.hostname }}' style="width:100px" maxlength='100' readonly='readonly' ></td>
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='regex' name='regex' data-id="{{ historyItem.id }}" value='{{ historyItem.regex }}' style="width:180px" maxlength='100' readonly='readonly' ></td>
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='ipduan_select' name='ipduan_select' data-id="{{ historyItem.id }}" value='{{ historyItem.ipduan_select }}' style="width:35px" maxlength='10' readonly='readonly' ></td>
+		<td><input class="rule_info" type='text' data-parent-id={{historyItem.parent_id}} id='ipduan_num' name='ipduan_num' data-id="{{ historyItem.id }}" value='{{ historyItem.ipduan_num }}' style="width:35px" maxlength='10' readonly='readonly' ></td>
+		{% else %}
+        <td>{{historyItem.desc}}</td>
+        <td>{{historyItem.freq}}</td>
+        <td>{{historyItem.num}}</td>
+        <td>{{historyItem.hostname}}</td>
+        <td>{{historyItem.regex}}</td>
+        <td>{{historyItem.ipduan_select}}</td>
+        <td>{{historyItem.ipduan_num}}</td>
+		{% endif %}
+        <td><a href=?type={{historyItem.parent_id}} target="_blank">查看封禁效果</a></td>
+      </tr>
+      {% endfor%}
+    </table>
+    <div class="pagination pagination-small pagination-right">
+      <ul>
+        {% if not data.monitorTypeList.previous_page_number %}
+        {% else %}
+          {% if data.q %}
+              {% if data.type >= 0 %}
+	              <a href="?type={{data.type}}&group_page={{ data.monitorTypeList.previous_page_number }}&page={{data.page}}&q={{data.q}}">«</a>
+              {% else %}
+                  <a href="?group_page={{ data.monitorTypeList.previous_page_number }}&page={{data.page}}&q={{data.q}}">«</a>
+              {% endif %}
+          {% else %}
+              {% if data.type >= 0 %}
+                  <a href="?type={{data.type}}&group_page={{ data.monitorTypeList.previous_page_number }}&page={{data.page}}">«</a>
+              {% else %}
+                  <a href="?group_page={{ data.monitorTypeList.previous_page_number }}&page={{data.page}}">«</a>
+              {% endif %}
+          {% endif %}
+
+        {% endif %}
+        <li class="active">
+          <a href="#">{{ data.monitorTypeList.number }}</a>
+        </li>
+        {% if not data.monitorTypeList.has_next %}
+        {% else %}
+          {% if data.q %}
+              {% if data.type >= 0 %}
+	              <a href="?type={{data.type}}&group_page={{ data.monitorTypeList.next_page_number }}&page={{data.page}}&q={{data.q}}">»</a>
+              {% else %}
+        	      <a href="?group_page={{ data.monitorTypeList.next_page_number }}&page={{data.page}}&q={{data.q}}">»</a>
+    	      {% endif %}
+          {% else %}
+              {% if data.type >= 0 %}
+            	  <a href="?type={{data.type}}&group_page={{ data.monitorTypeList.next_page_number }}&page={{data.page}}">»</a>
+              {% else %}
+             	 <a href="?group_page={{ data.monitorTypeList.next_page_number }}&page={{data.page}}">»</a>
+              {% endif %}
+          {% endif %}
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

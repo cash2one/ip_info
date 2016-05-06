@@ -1,0 +1,26 @@
+{% extends 'global/base.html' %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+    <li><a href="/">首页</a> <span class="divider">/</span></li>
+    <li class="active">错误</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+    <div class='span-12'>
+        <span class='loud error'>对不起，您可能因为下面的几个原因之一而没有权限访问这个页面：</span>
+
+        <div class='legend prepend-top'>
+            1.需要您登录才能访问<br/>
+            2.你的用户组权限不够<br/>
+            3.人品值略低<br/>
+        </div>
+        <br/>
+        <hr/>
+
+        请联系系统管理员帮助解决这个问题，如果您能为我们的产品提出更好的意见，我们不胜感激！
+    </div>
+    <div class='span-11 last'></div>
+    <div class='clear'></div>
+{% endblock %}

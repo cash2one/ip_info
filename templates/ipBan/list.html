@@ -1,0 +1,211 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <link href="/static/css/anjuke/home.css" rel="stylesheet" type="text/css" media="screen">
+    <script type="text/javascript" src="/static/assets/js/bootstrap-button.js"></script>
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">ip info</li>
+</ul>
+{% endblock %}
+{% block content %}
+      <ul class="nav pull-right">
+        <form method="get" class="form-search" id="searchform" action="">
+            <div class="input-append">
+                <input id="searchboxinput" class="search-query" type="text" name="q"  placeholder="Search ip" title="输入ip" style="width:150px" value={{data.q}} >
+                <input id="searchboxinput" class="search-query" type="hidden" name="type" value='{{data.type}}'>
+                <button id="searchButton" type="submit" class="btn">搜索</button>
+            </div>
+            <a id="searchHelp" class="btn hide" href="#" style="padding-left: 5px; padding-right: 5px"><i class="icon-question-sign"></i></a>
+        </form>
+      </ul>
+	<ul class="nav nav-pills">
+     	<li><a href="?type=0">init</a></li>
+    {% ifequal data.type 0 %}
+     	<li class="active"><a href="?type=0&page={{data.page}}&group_page={{data.groupPage}}&q={{data.q}}">all</a></li>
+	{% else %}
+     	<li><a href="?type=0&page={{data.page}}&group_page={{data.groupPage}}&q={{data.q}}">all</a></li>
+	{% endifequal %}
+    {% for type in data.ruleList %}
+		 {% ifequal type.id data.type %} 
+                 {% if data.q %}
+   	  		   		 <li class="active"><a href="?type={{type.id}}&q={{data.q}}">{{type.desc}}</a></li>
+                 {% else %}
+            	     <li class="active"><a href="?type={{type.id}}">{{type.desc}}</a></li>
+                 {% endif %}
+		 {% else %}
+                 {% if data.q %}
+   			   		 <li><a href="?type={{type.id}}&q={{data.q}}">{{type.desc}}</a></li>
+                 {% else %}
+            	     <li><a href="?type={{type.id}}">{{type.desc}}</a></li>
+                 {% endif %}
+         {% endifequal %}
+      {% endfor %}
+	</ul>
+<div class="row">
+  <div style="width:44%;border:1px;float:left;">
+    <table class='table table-striped'>
+      <thead>
+        <tr>group</tr>
+        <tr>
+          <th>ip</th>
+          <th>type</th>
+          <th>count</th>
+        </tr>
+      </thead>
+      {% for historyItem in data.groupList %}
+      <tr>
+        <td><a href="?q={{historyItem.ip}}&type=0">{{historyItem.ip}}</a></td>
+        <td>{{historyItem.type}}</td>
+        <td>{{historyItem.gcount}}</td>
+       {% if historyItem.status %}
+        	<td></td>
+       {% else %}
+        	<td><a href=http://kibana.tj.corp.anjuke.com/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(request_uri,referer,user_agent,hostname,http_code),index:'logstash-nginx-access.lasthour.user',interval:auto,query:(query_string:(analyze_wildcard:!t,query:'remote_addr:{{historyItem.ip}}')),sort:!('@timestamp',desc)) target="_blank">{{historyItem.status}}</a></td>
+       {% endif%}
+       {% if data.auth != 0 %}
+           {% if historyItem.status %}
+                <td></td>
+            	<td><a href=http://site-api.tj.a.ajkdns.com/tools/ip-shield/?act=setWhite&ip={{historyItem.ip}} target="_blank">漂白</a></td>
+                <td></td>
+	       {% else %}
+                <td><a href=http://site-api.tj.a.ajkdns.com/tools/ip-shield/?act=addBlack&ip={{historyItem.ip}} target="_blank">拉黑</a></td>
+                <td></td>
+                <td><a href=http://site-api.tj.a.ajkdns.com/tools/ip-forever-shield/?act=addBlack&ip={{historyItem.ip}} target="_blank">永久黑</a></td>
+           {% endif %}
+       {% endif %}
+      </tr>
+      {% endfor%}
+    </table>
+    <div class="pagination pagination-small pagination-right">
+      <ul>
+        {% if not data.groupList.previous_page_number %}
+        {% else %}
+          {% if data.q %}
+              {% if data.type >= 0 %}
+	              <a href="?type={{data.type}}&group_page={{ data.groupList.previous_page_number }}&page={{data.page}}&q={{data.q}}">«</a>
+              {% else %}
+                  <a href="?group_page={{ data.groupList.previous_page_number }}&page={{data.page}}&q={{data.q}}">«</a>
+              {% endif %}
+          {% else %}
+              {% if data.type >= 0 %}
+                  <a href="?type={{data.type}}&group_page={{ data.groupList.previous_page_number }}&page={{data.page}}">«</a>
+              {% else %}
+                  <a href="?group_page={{ data.groupList.previous_page_number }}&page={{data.page}}">«</a>
+              {% endif %}
+          {% endif %}
+
+        {% endif %}
+        <li class="active">
+          <a href="#">{{ data.groupList.number }}</a>
+        </li>
+        {% if not data.groupList.has_next %}
+        {% else %}
+          {% if data.q %}
+              {% if data.type >= 0 %}
+	              <a href="?type={{data.type}}&group_page={{ data.groupList.next_page_number }}&page={{data.page}}&q={{data.q}}">»</a>
+              {% else %}
+        	      <a href="?group_page={{ data.groupList.next_page_number }}&page={{data.page}}&q={{data.q}}">»</a>
+    	      {% endif %}
+          {% else %}
+              {% if data.type >= 0 %}
+            	  <a href="?type={{data.type}}&group_page={{ data.groupList.next_page_number }}&page={{data.page}}">»</a>
+              {% else %}
+             	 <a href="?group_page={{ data.groupList.next_page_number }}&page={{data.page}}">»</a>
+              {% endif %}
+          {% endif %}
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div style="width:55%;float:right;">
+    <table class='table table-striped'>
+      <thead>
+        <tr>ip history</tr>
+        <tr>
+          <th>ip</th>
+          <th>type</th>
+          <th>count</th>
+          <th>time</th>
+          <th>is_ipduan</th>
+        </tr>
+      </thead>
+      {% for historyItem in data.historyList %}
+      <tr>
+        <td><a href="?q={{historyItem.ip}}&type={{data.type}}">{{historyItem.ip}}</a></td>
+        <td>{{historyItem.type}}</td>
+        <td>{{historyItem.count}}</td>
+        <td>{{historyItem.created}}</td>
+        {% if historyItem.is_ipduan %}
+      		<td>yes</td>
+		{% else %}
+			<td></td>
+        {% endif %}
+        {% if historyItem.status %}
+        	<td></td>
+        {% else %}
+        	<td><a href=http://kibana.tj.corp.anjuke.com/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(request_uri,referer,user_agent,hostname,http_code),index:'logstash-nginx-access.lasthour.user',interval:auto,query:(query_string:(analyze_wildcard:!t,query:'remote_addr:{{historyItem.ip}}')),sort:!('@timestamp',desc)) target="_blank">{{historyItem.status}}</a></td>
+       {% endif%}
+       {% if data.auth != 0 %}
+           {% if historyItem.status %}
+                <td></td>
+            	<td><a href=http://site-api.tj.a.ajkdns.com/tools/ip-shield/?act=setWhite&ip={{historyItem.ip}} target="_blank">漂白</a></td>
+	       {% else %}
+                <td><a href=http://site-api.tj.a.ajkdns.com/tools/ip-shield/?act=addBlack&ip={{historyItem.ip}} target="_blank">拉黑</a></td>
+                <td></td>
+           {% endif %}
+       {% endif %}
+      </tr>
+      {% endfor%}
+    </table>
+    <div class="pagination pagination-small pagination-right">
+      <ul>
+        {% if not data.historyList.previous_page_number %}
+        {% else %}
+          {% if data.q %}
+              {% if data.type >= 0 %}
+                  <a href="?type={{data.type}}&page={{ data.historyList.previous_page_number }}&group_page={{data.groupPage}}&q={{data.q}}">«</a>
+              {% else %}
+                  <a href="?page={{ data.historyList.previous_page_number }}&group_page={{data.groupPage}}&q={{data.q}}">«</a>
+              {% endif %}
+          {% else %}
+              {% if data.type >= 0 %}
+              <a href="?type={{data.type}}&page={{ data.historyList.previous_page_number }}&group_page={{data.groupPage}}">«</a>
+              {% else %}
+              <a href="?page={{ data.historyList.previous_page_number }}&group_page={{data.groupPage}}">«</a>
+              {% endif %}
+          {% endif %}
+
+        {% endif %}
+        <li class="active">
+          <a href="#">{{ data.historyList.number }}</a>
+        </li>
+        {% if not data.historyList.has_next %}
+        {% else %}
+          {% if data.q %}
+              {% if data.type >= 0 %}
+	              <a href="?type={{data.type}}&page={{ data.historyList.next_page_number }}&group_page={{data.groupPage}}&q={{data.q}}">»</a>
+              {% else %}
+        	      <a href="?page={{ data.historyList.next_page_number }}&group_page={{data.groupPage}}&q={{data.q}}">»</a>
+    	      {% endif %}
+          {% else %}
+              {% if data.type >= 0 %}
+            	  <a href="?type={{data.type}}&page={{ data.historyList.next_page_number }}&group_page={{data.groupPage}}">»</a>
+              {% else %}
+             	 <a href="?page={{ data.historyList.next_page_number }}&group_page={{data.groupPage}}">»</a>
+              {% endif %}
+          {% endif %}
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+    <br/>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+.em_red{
+	color:red;
+	padding-left: 20px;
+}
+
+.errorlist{
+	padding:0.8em;
+	margin-bottom:1em;
+	border:2px solid #ddd;
+	background:#fbe3e4;
+	color:#8a1f11;
+	border-color:#fbc2c4;
+}
+
+.errorlist li{
+	list-style:none;
+}
+
+input#id_name{
+	width:400px;
+}
+
+textarea#id_description{
+	width:400px;
+}
+
+#id_suffix{
+	ime-mode:disabled
+}
+
+.ctnText{
+	width:600px;
+}
+.appendItem{
+	display:none
+}

@@ -1,0 +1,73 @@
+	#team_form{
+		width:550px;
+	}
+	#team_form .notice{
+		margin-bottom:15px;
+	}
+	#team_form .notice label{
+		display:inline;
+		color:red;
+	}
+	 #team_form .notice .weeknum{
+	 	margin-left:20px;
+	 }
+	 #team_form .submit{
+	 	float:right;
+	 	margin-right:10px;
+	 }
+	.form_list{
+		margin-bottom:20px;
+	}
+	.form_list .list{
+		margin-left:80px;
+	}
+	.form_list .list label{
+		float:left;
+		margin-top:5px;
+	}
+	.form_list .tit label{
+		float:left;
+	}
+	.form_list .tit .act{
+		float:left;
+		margin-left:410px;
+	}
+	.form_list .list input{
+		float:left;
+		width:400px;
+		margin-left:10px;
+	}
+	.form_content .content{
+		margin-left:80px;
+		margin-bottom:20px;
+	}
+	.form_content .content textarea{
+		width:445px;
+		height:100px;
+	}
+	.email_span{
+		margin-left:80px;
+		margin-bottom:20px;
+		width:460px;
+	}
+	.email_span .addemail{
+		margin-top:15px;
+	}
+	.email_span input[type="checkbox"] {
+		margin: 3px 3px 3px 4px;
+	}
+	.choose{
+		margin-top:5px;
+		text-align:right;
+	}
+	.email_span ul{
+		list-style:none;
+		margin:0px;
+	}
+	.email_span ul li{
+		float:left;
+		width:100px;
+	}
+	.addemail .newemailtxt{
+		width:300px;
+	}

@@ -1,0 +1,77 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <link href="/static/css/anjuke/home.css" rel="stylesheet" type="text/css" media="screen">
+    <script type="text/javascript" src="/static/js/anjuke/home.js"></script>
+    <script type="text/javascript" src="/static/assets/js/bootstrap-button.js"></script>
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">user agent info</li>
+</ul>
+{% endblock %}
+{% block content %}
+      <ul class="nav pull-right">
+        <form method="get" class="form-search" id="searchform" action="">
+            <div class="input-append">
+                <input id="searchboxinput" class="search-query" type="text" name="q"  placeholder="Search user agent" title="输入user agent" style="width:150px" value={{data.q}}>
+                <button id="searchButton" type="submit" class="btn">搜索</button>
+            </div>
+            <a id="searchHelp" class="btn hide" href="#" style="padding-left: 5px; padding-right: 5px"><i class="icon-question-sign"></i></a>
+        </form>
+      </ul>
+    <ul class="nav nav-pills">
+
+    </ul>
+<div class="row">
+  <div>
+    <table class='table table-striped'>
+      <thead>
+        <tr>
+          <th>user_agent</th>
+        </tr>
+      </thead>
+      {% for historyItem in data.list %}
+      <tr>
+        <td><a href="?q={{historyItem.user_agent}}">{{historyItem.user_agent}}</a></td>
+        {% if data.auth != 0 %}
+            <td><a href=../updateUa?is_del=1&id={{historyItem.id}}>移除</a></td>
+			<td><a href=http://kibana.tj.corp.anjuke.com/app/kibana#/discover?_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-15m,mode:quick,to:now))&_a=(columns:!(request_uri,referer,user_agent,hostname,http_code),index:'logstash-nginx-access.lasthour.user',interval:auto,query:(query_string:(analyze_wildcard:!t,query:'user_agent:{{historyItem.user_agent}}')),sort:!('@timestamp',desc)) target="_blank">to kibana</a></td>
+            <td><a href=http://kibana.tj.corp.anjuke.com/app/kibana#/visualize/create?type=table&indexPattern=logstash-nginx-access.lasthour.user&_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-60m,mode:quick,to:now))&_a=(filters:!(),linked:!f,query:(query_string:(analyze_wildcard:!t,query:'user_agent:{{historyItem.user_agent}}')),uiState:(),vis:(aggs:!((id:'1',params:(),schema:metric,type:count),(id:'2',params:(field:user_agent.raw,order:desc,orderBy:'1',size:500),schema:bucket,type:terms)),listeners:(),params:(perPage:10,showMeticsAtAllLevels:!f,showPartialRows:!f),type:table)) target="_blank">match list</a></td>
+            <td><a href='http://deploy.corp.anjuke.com/user_agent/' target="_blank">封禁历史</a></td>
+        {% endif %}
+      </tr>
+      {% endfor%}
+    </table>
+    <div class="pagination pagination-small pagination-right">
+      <ul>
+        {% if not data.list.previous_page_number %}
+        {% else %}
+          {% if data.q %}
+                  <a href="?page={{ data.list.previous_page_number }}&q={{data.q}}">«</a>
+          {% else %}
+                  <a href="?page={{ data.list.previous_page_number }}">«</a>
+          {% endif %}
+
+        {% endif %}
+        <li class="active">
+          <a href="#">{{ data.list.number }}</a>
+        </li>
+        {% if not data.list.has_next %}
+        {% else %}
+          {% if data.q %}
+        	      <a href="?page={{ data.list.next_page_number }}&q={{data.q}}">»</a>
+          {% else %}
+             	  <a href="?page={{ data.list.next_page_number }}">»</a>
+          {% endif %}
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

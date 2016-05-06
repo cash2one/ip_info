@@ -1,0 +1,44 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <link href="/static/assets/css/sakuya.css" rel="stylesheet">
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">新增规则</li>
+</ul>
+{% endblock %}
+
+{% block content %}
+{% if data.auth != 0 %}
+    <div>
+        <form action="addRule" method="get">
+            类型：
+            <select name="parent_id" style="width: 130px">
+            {% for id in data.ruleList %}
+                <option value={{id.id}}>{{id.desc}}</option>
+            {% endfor %}
+           </select>
+           </br>
+           间隔：<input type="text" name="freq" maxlength="2" placeholder="5">
+           </br>
+           数量：<input type="text" name="num" maxlength="6" placeholder="1500">
+           </br>
+           域名：<input type="text" name="hostname" maxlength="20" placeholder="*.anjuke.com">
+           </br>
+           正则：<input type="text" name="regex" maxlength="20" placeholder="/prop/view/[0-9]+.*">
+           </br>
+           ip段select量：<input type="text" name="num" maxlength="6" placeholder="1000">
+           </br>
+           ip段限制数量：<input type="text" name="num" maxlength="6" placeholder="20000">
+           </br>
+            <button type="submit" class="btn btn-success">确定</button>
+        </form>
+    </div>
+{% else %}
+	<font size="3px" color="red">很遗憾，你没有权限 </font>
+{% endif %}
+{% endblock %}

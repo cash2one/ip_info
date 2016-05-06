@@ -1,0 +1,8 @@
+*.pyc
+*.swp
+*.swm
+*.swn
+*.swo
+settings.py
+nohup.out
+restart.sh

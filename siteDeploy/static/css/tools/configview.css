@@ -1,0 +1,32 @@
+body {
+
+}
+
+#output_column{
+	float:right;
+	width:80%;
+	min-height:500px;
+	font-size: 12px;
+}
+
+#htmlUlBox li{
+	float:left;
+	margin:20px;
+	list-style:none;
+    width:100px;
+    padding:5px;
+}
+
+#htmlUlBox li a{
+	text-decoration: none;
+}
+
+a.tdir{
+	color:blue;
+	font-style:bold;
+}
+
+a.tfile{
+	color:black;
+	font-style:bold;
+}

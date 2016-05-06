@@ -1,0 +1,22 @@
+{% extends 'global/base.html' %}
+{% load url %}
+
+{% block jscss %}
+    <link href="/static/css/anjuke/home.css" rel="stylesheet" type="text/css" media="screen">
+    <script type="text/javascript" src="/static/js/anjuke/home.js"></script>
+    <script type="text/javascript" src="/static/assets/js/bootstrap-button.js"></script>
+{% endblock %}
+
+{% block crumb %}
+<ul class="breadcrumb">
+<li><a href="/">首页</a> <span class="divider">/</span></li>
+<li class="active">ip封禁,后台管理</li>
+</ul>
+{% endblock %}
+{% block content %}
+<ul>
+<li><a href="../addIpHtml" target="_blank">新增ip</a></li>
+<hr>
+<li><a href="../addRuleHtml" target="_blank">新增规则</a></li>
+</ul>
+{% endblock %}
